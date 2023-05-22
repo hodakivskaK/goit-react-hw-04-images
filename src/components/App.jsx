@@ -60,7 +60,7 @@ export const App = () => {
       
     }
 
-  }, [query, loadMore]);
+  }, [query, currentPage, loadMore]);
 
 
   const loadMoreToggle = () => {
