@@ -18,7 +18,7 @@ export const App = () => {
     if (query) {
       fetchImages();
     }
-  }, [query]);
+  }, [query, fetchImages]);
 
   useEffect(() => {
     if (query) {
@@ -38,7 +38,7 @@ export const App = () => {
     setError(null);
   };
 
-  const fetchImages = () => {
+  const fetchImages = useCallback(() => {
     const options = {
       query,
       currentPage,
@@ -59,7 +59,7 @@ export const App = () => {
       .catch(err => {setError(err)
        setStatus("rejected")})
       .finally(() => setIsLoading(false));
-  };
+  });
 
 
   
