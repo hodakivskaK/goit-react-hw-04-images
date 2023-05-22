@@ -9,7 +9,7 @@ import s from './ImageGallery.module.css';
 export function ImageGallery({
   images,
   error,
-  fetchImages,
+  loadMore,
     total,
   status
 }) {
@@ -53,7 +53,7 @@ export function ImageGallery({
         ))}
       </ul>
 
-    {total >= 12 && images.length < total && <Button onConsole={fetchImages} />}
+    {total >= 12 && images.length < total && <Button onLoad={loadMore} />}
       
           {showModal && (
               <Modal onClose={toggleModal} src={ largeImageURL} discr ={altImg}>
@@ -67,7 +67,7 @@ export function ImageGallery({
 ImageGallery.propTypes = {
   images: PropTypes.array,
   error: PropTypes.string,
-  fetchImages: PropTypes.string,
+  loadMore: PropTypes.func,
     total: PropTypes.number,
   status: PropTypes.string,
 };

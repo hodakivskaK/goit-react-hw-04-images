@@ -10,16 +10,9 @@ export const App = () => {
   const [images, setImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loadMore, setLoadMore] = useState(false)
   const [totalImg, setTotalImg] = useState(0);
   
-
-  useEffect(() => {
-    if (query) {
-      fetchImages();
-    }
-  }, [query, fetchImages]);
-
   useEffect(() => {
     if (query) {
       return;
@@ -36,9 +29,12 @@ export const App = () => {
     setImages([]);
     setCurrentPage(1);
     setError(null);
-  };
+  }; 
 
-  const fetchImages = useCallback(() => {
+  useEffect(() => {
+    
+    if (query) {
+      function fetchImages() {
     const options = {
       query,
       currentPage,
@@ -58,9 +54,19 @@ export const App = () => {
       )
       .catch(err => {setError(err)
        setStatus("rejected")})
-      .finally(() => setIsLoading(false));
-  });
+  
+      }
+     fetchImages()
+      
+    }
 
+  }, [query, loadMore]);
+
+
+  const loadMoreToggle = () => {
+      setLoadMore(prevState => !prevState);
+
+  }
 
   
   return  <div className={s.App} >
@@ -70,8 +76,7 @@ export const App = () => {
         images={images}
         currentPage={currentPage}
         error={error}
-        isLoading={isLoading}
-        fetchImages={fetchImages}
+        loadMore={loadMoreToggle}
         total={totalImg}
         status={status}
       />
