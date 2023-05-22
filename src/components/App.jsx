@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {fetchImg} from './FetchImg';
 import {Searchbar} from './Searchbar';
 import { ImageGallery } from './ImageGallery';
-import { Loader } from './Loader';
 import s from './App.module.css'
 
 export const App = () => {
@@ -19,7 +18,7 @@ export const App = () => {
     if (query) {
       fetchImages();
     }
-  }, [query]);
+  }, [query, fetchImages]);
 
   useEffect(() => {
     if (query) {
@@ -50,9 +49,10 @@ export const App = () => {
     fetchImg(options)
       .then(
         gallery => {
-          return setImages(prevState => [...prevState, ...gallery.hits]),
-        setCurrentPage(prevState => prevState + 1),
-          setTotalImg(gallery.totalHits),
+         
+            setImages(prevState => [...prevState, ...gallery.hits])
+            setCurrentPage(prevState => prevState + 1)
+          setTotalImg(gallery.totalHits)
           setStatus("resolved")
         }
       )
