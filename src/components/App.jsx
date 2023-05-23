@@ -29,18 +29,15 @@ export const App = () => {
     setImages([]);
     setCurrentPage(1);
     setError(null);
-  }; 
+    }; 
 
   useEffect(() => {
     
-    if (query) {
       function fetchImages() {
     const options = {
       query,
       currentPage,
     };
-
-    
     setStatus("pending")
     fetchImg(options)
       .then(
@@ -53,14 +50,18 @@ export const App = () => {
         }
       )
       .catch(err => {setError(err)
-       setStatus("rejected")})
-  
-      }
-     fetchImages()
-      
+        setStatus("rejected")
+      })
+    }
+    
+
+    if (query) {
+        fetchImages()
     }
 
-  }, [query, currentPage, loadMore]);
+    
+
+  }, [query, loadMore]);
 
 
   const loadMoreToggle = () => {

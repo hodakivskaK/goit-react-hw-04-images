@@ -33,7 +33,7 @@ export function ImageGallery({
 
   return (
       <>
-           {status === "idle" && (<h1>Start search</h1>)}
+        {status === "idle" && (<h1>Start search</h1>)}
        {status === "pending" && (<Loader />)}
         {status === "rejected" && (<h1> {error} </h1>)}
         
