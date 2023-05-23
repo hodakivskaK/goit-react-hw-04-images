@@ -34,12 +34,9 @@ export const App = () => {
   useEffect(() => {
     
       function fetchImages() {
-    const options = {
-      query,
-      currentPage,
-    };
     setStatus("pending")
-    fetchImg(options)
+    fetchImg(query,
+      currentPage)
       .then(
         gallery => {
          
