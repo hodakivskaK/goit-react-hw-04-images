@@ -39,9 +39,7 @@ export const App = () => {
       currentPage)
       .then(
         gallery => {
-         
             setImages(prevState => [...prevState, ...gallery.hits])
-            setCurrentPage(prevState => prevState + 1)
           setTotalImg(gallery.totalHits)
           setStatus("resolved")
         }
@@ -49,8 +47,12 @@ export const App = () => {
       .catch(err => {setError(err)
         setStatus("rejected")
       })
-    }
+      .finally(() => {
+          return
+        })
     
+    }
+
 
     if (query) {
         fetchImages()
@@ -58,12 +60,12 @@ export const App = () => {
 
     
 
-  }, [query, loadMore]);
+  }, [query, currentPage, loadMore]);
 
 
   const loadMoreToggle = () => {
       setLoadMore(prevState => !prevState);
-
+      setCurrentPage(prevState => prevState + 1)
   }
 
   
